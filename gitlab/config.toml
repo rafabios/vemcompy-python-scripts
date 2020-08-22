@@ -1,0 +1,18 @@
+concurrent = 1
+check_interval = 0
+
+[[runners]]
+  name = "ubuntu-k8s-1"     # Alterar
+  url = "https://gitlab.vemcompy.net/"  # Alterar
+  token = "XXXXXXXXXXXXXXXX"  # Alterar
+  tls-ca-file = "/etc/gitlab-runner/certs/gitlab.vemcompy.net.crt"  # Alterar
+  executor = "docker"
+  [runners.docker]
+    tls_verify = false
+    image = "docker:latest"
+    privileged = true
+    disable_cache = false
+      extra_hosts   = ["gitlab.vemcompy.net:192.168.1.40"]   # Alterar
+    volumes = ["/cache","/var/run/docker.sock:/var/run/docker.sock" ]   # Alterar
+    shm_size = 0
+  [runners.cache]
