@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Instala o runner em distribuicoes baseadas em debian
-apt-get update && apt-get install gitlab-runner || true
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash || true
 
 # Instala o runner em distribuicoes baseadas em centos
-yum install gitlab-runner || true
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | sudo bash || true
 
 # Alterar esse valor para seu endereco
 SERVER=gitlab.vemcompy.net
