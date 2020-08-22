@@ -21,3 +21,6 @@ openssl s_client -connect ${SERVER}:${PORT} -showcerts </dev/null 2>/dev/null | 
 
 # Register your runner
 gitlab-runner register --tls-ca-file="$CERTIFICATE"
+
+# Criar pasta em caso do script falhar
+mkdir -p /var/lib/gitlab-runner/
