@@ -1,0 +1,22 @@
+before_script:
+  - apt-get update -qy
+  - apt-get install -y python-dev python-pip zip
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - python -m pylint --exit-zero app/app.py 
+
+staging:
+  stage: deploy
+  script:
+    - zip pacote.zip app/*.py   
+  artifacts:
+    paths:
+      - pacote.zip
+    expire_in: 1 week
