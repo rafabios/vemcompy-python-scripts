@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Create default containers
+      docker_container:
+        name: "{{ ansible_container_name }}"
+        image: "{{ ansible_container_image }}"
+        published_ports:
+        - "{{ ansible_container_port }}"
+        state: started
