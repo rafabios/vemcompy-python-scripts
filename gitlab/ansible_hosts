@@ -1,0 +1,5 @@
+[all]
+192.168.1.40
+
+[all:vars]
+host_key_checking=False
