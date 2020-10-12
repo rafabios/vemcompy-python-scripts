@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app_name: vemcompy-ws
+    tier: dev
+  name: vemcompy-ws
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app_name: vemcompy-ws
+      tier: dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app_name: vemcompy-ws
+        tier: dev
+    spec:
+      containers:
+      - env:
+        - name: WEBSERVICE_BGCOLOR
+          value: 'green'
+        - name: WEBSERVICE_PORT
+          value: '80'        
+        image: vemcompy/ludonews_webservice:dev
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        name: vemcompy-ws
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 10m
+            memory: 50Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
