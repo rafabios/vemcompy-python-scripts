@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vemcompy-service
+spec:
+  selector:
+    app_name: vemcompy-ws
+    tier: dev
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP     # ou NodePort
